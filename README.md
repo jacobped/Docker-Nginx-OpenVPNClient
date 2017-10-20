@@ -1,5 +1,6 @@
 # Docker-Nginx-OpenVPNClient
 Docker powered container for using Nginx in combination with an OpenVPN Client. 
+
 Ideal for a local reverse-proxy with incoming requests coming through an OpenVPN connection.
 
 ## Example scenario:
@@ -14,3 +15,16 @@ This way, you can set it up so when someone visits your vps on the given port th
 It's a bit complex, but absolutely amazing when you have it running. 
 
 I'll make it a bit easier to update the configs later, by having them loaded in every time the container starts from a mounted volume.
+
+## Build & Run
+Download repository, edit the configs, and run the following command on you host to build the image. 
+
+**(Remember to edit configs before you build)**
+
+`docker build -t nginx-openvpnclient .`
+
+Command to run the container in the background
+
+`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun nginx-openvpnclient`
+
+And if everything is set up correctly, it should now connect and proxy traffix comming from the vpn connection.
