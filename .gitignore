@@ -1,5 +1,5 @@
 
 # Custom
 .directory
-conf/openvpn.ovpn
-conf/nginx.conf
+openvpn.ovpn
+nginx.conf
