@@ -8,7 +8,7 @@ export DEBIAN_FRONTEND='noninteractive'
 rm -v /etc/nginx/nginx.conf
 
 # Copy a configuration file from the current directory
-cp /config/nginx.conf /etc/nginx/
+cp -v /config/nginx.conf /etc/nginx/
 chown -R nginx:nginx /etc/nginx
 chmod -w+r /etc/nginx/nginx.conf
 chown -R nginx /var/log/nginx

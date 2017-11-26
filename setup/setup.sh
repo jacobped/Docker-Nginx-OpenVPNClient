@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND='noninteractive'
 #apt-get update -y && apt-get install apt-utils -y
 #apt-get update -y
 
+#For ps command
+apt-get install -y procps
+
 #--- Setup Nginx ---
 apt-get install nginx -y
 
@@ -15,11 +18,12 @@ service nginx stop
 update-rc.d nginx disable
 
 # Add sample configs to config dir as usable configs.
-cp /setup/config/nginx.conf.sample /config/nginx.conf
-cp /setup/config/openvpn.ovpn.sample /config/openvpn.ovpn
+#mkdir /config
+#cp /setup/config/nginx.conf.sample /config/nginx.conf
+#cp /setup/config/openvpn.ovpn.sample /config/openvpn.ovpn
 
 # Reload nginx config, to use manual configured variant.
-/setup/reload_nginx-config.sh
+#/setup/reload_nginx-config.sh
 
 # Append "daemon off;" to the beginning of the configuration
 #echo "daemon off;" >> /etc/nginx/nginx.conf
