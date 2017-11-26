@@ -19,6 +19,6 @@ else
 
 	# Start services
 	#exec /usr/sbin/nginx -g "daemon on;" & \
-	exec /usr/sbin/openvpn --config /config/openvpn.ovpn
+	#exec /usr/sbin/openvpn --config /config/openvpn.ovpn
 	supervisord -n -c /etc/supervisor.conf
 fi
