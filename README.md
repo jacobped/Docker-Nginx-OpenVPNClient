@@ -16,6 +16,17 @@ It's a bit complex, but absolutely amazing when you have it running.
 
 I'll make it a bit easier to update the configs later, by having them loaded in every time the container starts from a mounted volume.
 
+## Run
+Command to run the container in the background
+
+`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun -v localConfigPath:/config -v localLogPath:/log jacobpeddk/nginx-openvpnclient`
+
+Remember to at least map local path to container's /config.
+If no configs exists in local mapped folder, it will add samle configs and terminate.
+Then you update sample configs and run the container again.
+
+`docker start nginxopenvpn`
+
 ## Build & Run
 Download repository, edit the configs, and run the following command on you host to build the image. 
 
@@ -25,6 +36,6 @@ Download repository, edit the configs, and run the following command on you host
 
 Command to run the container in the background
 
-`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun nginx-openvpnclient`
+`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun -v localConfigPath:/config -v localLogPath:/log nginx-openvpnclient`
 
 And if everything is set up correctly, it should now connect and proxy traffix comming from the vpn connection.
