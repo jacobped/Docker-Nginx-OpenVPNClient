@@ -9,8 +9,8 @@ if [ ! -f /config/nginx.conf ] || [ ! -f /config/openvpn.ovpn ]; then
 	cp /setup/config/openvpn.ovpn.sample /config/openvpn.ovpn
 	echo 'Copied sample files to directory.'
 else
-	if [ ! -d /config/nginx ]; then
-		mkdir /config/nginx
+	if [ ! -d /log/nginx ]; then
+		mkdir /log/nginx
 	fi
 
 	# Reload nginx config, to use manual configured variant.
