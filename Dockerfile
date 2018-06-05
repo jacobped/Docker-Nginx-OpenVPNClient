@@ -21,9 +21,8 @@ RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d && \
 RUN find . -type f -print0 | xargs -0 dos2unix
 
 # Setup services
-RUN chown -R root:root /setup && \
-	chmod -R -w+r+x /setup && \
-	/setup/setup.sh
+RUN chown -R root:root /setup && chmod -R -w+r+x /setup
+RUN /setup/setup.sh
 
 # Setup Supervisor
 RUN apt-get -y install supervisor && \
