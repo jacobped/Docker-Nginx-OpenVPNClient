@@ -3,6 +3,13 @@ Docker powered container for using Nginx in combination with an OpenVPN Client.
 
 Ideal for a local reverse-proxy with incoming requests coming through an OpenVPN connection.
 
+### Docker Image
+[![Docker Pulls](https://img.shields.io/docker/pulls/jacobpeddk/nginx-openvpnclient.svg)](https://hub.docker.com/r/jacobpeddk/nginx-openvpnclient)
+[![Docker Stars](https://img.shields.io/docker/stars/jacobpeddk/nginx-openvpnclient.svg)](https://hub.docker.com/r/jacobpeddk/nginx-openvpnclient)
+[![](https://images.microbadger.com/badges/image/jacobpeddk/nginx-openvpnclient.svg)](https://microbadger.com/images/jacobpeddk/nginx-openvpnclient "Container Image size and layers")
+[![](https://images.microbadger.com/badges/commit/jacobpeddk/nginx-openvpnclient.svg)](https://microbadger.com/images/jacobpeddk/nginx-openvpnclient "Current commit that the container is build from")
+[![](https://images.microbadger.com/badges/version/jacobpeddk/nginx-openvpnclient.svg)](https://microbadger.com/images/jacobpeddk/nginx-openvpnclient "Container version")
+
 ### Example scenario:
 You have a docker host with containers on your local network, which you would like to be accessible to the outside world, but you can't open firewall ports. Or you simple prefer having the external ip for the services originate somewhere else.
 Get a VPS and set it up with an OpenVPN Host and Nginx to reverse-proxy traffic from it. 
