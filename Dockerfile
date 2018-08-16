@@ -4,7 +4,15 @@
 ############################################################
 
 FROM debian:stable-slim
-MAINTAINER Jacob Pedersen <jacob@jacobpedersen.dk>
+
+ARG BUILD_DATE
+ARG VCS_REF
+
+MAINTAINER jacobpeddk
+LABEL maintainer="jacobpeddk"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.vcs-url="https://github.com/jacobped/Docker-Nginx-OpenVPNClient"
+LABEL org.label-schema.vcs-ref=$VCS_REF
 
 WORKDIR /setup
 ENV DEBIAN_FRONTEND noninteractive
