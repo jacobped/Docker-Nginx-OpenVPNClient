@@ -29,14 +29,15 @@ Just overwrite those with your changes.
 
 ```
 docker create \
-  --cap-add=NET_ADMIN \
   --name=nginxopenvpn \
   -v <path to data>:/config \
   -e PGID=<gid> -e PUID=<uid>  \
   -p 8282:80 \
-  -e TZ=<timezone> \
-  linuxserver/letsencrypt
+  --cap-add=NET_ADMIN \
+  --device=/dev/net/tun \
+  jacobpeddk/nginx-openvpnclient
 ```
+
 ### Port mapping
 Port mapping is optional and only needed for testing the nginx reverse proxy config locally.  
 To test it locally, visit: `<host ip>:8282`
