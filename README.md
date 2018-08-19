@@ -25,24 +25,56 @@ It's a bit complex, but absolutely amazing when you have it running. You can als
 The container comes with sample configs, that'll be added to the mapped /config volume if they don't already exist.
 Just overwrite those with your changes.
 
-## Run
-Command to run the container in the background
+## Usage
 
-`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun -v localConfigPath:/config -v localLogPath:/log jacobpeddk/nginx-openvpnclient`
+```
+docker create \
+  --cap-add=NET_ADMIN \
+  --name=nginxopenvpn \
+  -v <path to data>:/config \
+  -e PGID=<gid> -e PUID=<uid>  \
+  -p 8282:80 \
+  -e TZ=<timezone> \
+  linuxserver/letsencrypt
+```
+### Port mapping
+Port mapping is optional and only needed for testing the nginx reverse proxy config locally.  
+To test it locally, visit: `<host ip>:8282`
 
-Remember to at least map host path to container's /config.
-If no configs exists in host mapped folder, it will add samle configs to it and terminate.
-Then you can update sample configs and run the container again.
+### PGID and PUID
+Will define the user and group ids that the container will handle the files and processes as.  
 
-`docker start nginxopenvpn`
+PGID can be found by executing: `id -g`  
+PUID can be found by executing: `id -u`  
 
 ## Build & Run
 Download repository,and run the following command on you host to build the image. 
 
-`docker build -t nginx-openvpnclient .`
+```
+docker build -t nginx-openvpnclient .
+```
 
-Command to run the container in the background. (replace `localConfigPath` and `localLogPath` with their respective host paths.
+To test it:
 
-`docker run -d --name nginxopenvpn -p 80:80 --cap-add=NET_ADMIN --device=/dev/net/tun -v localConfigPath:/config -v localLogPath:/log nginx-openvpnclient`
+```
+docker run -it --rm --name nginxopenvpn -e PGID=<gid> -e PUID=<uid> -p 8282:80 --cap-add=NET_ADMIN --device=/dev/net/tun -v <localConfigPath>:/config nginx-openvpnclient
+```
 
 And if everything is set up correctly, it should now connect and proxy traffix comming from the vpn connection.
+
+# Usefull websites resources
+ * [linuxserver.io alpine base image](https://github.com/linuxserver/docker-baseimage-alpine/)
+ * [S6 service handler for containers](https://github.com/just-containers/s6-overlay)
+ * [Information about the s6-svscanctl program](https://skarnet.org/software/s6/s6-svscanctl.html)
+
+
+# Changelog
+Important changes will be listed here.  
+Pattern is: year-month-date
+
+## 2018-08-19  
+Major changes to image. Made it far more robust and smaller in size.
+* Removed dos2unix - It will no longer fix files created with wrong line ending on windows.
+* Changes image base to the alpine image with s6 support from [linuxserver.io](https://github.com/linuxserver/docker-baseimage-alpine/)
+* Changed everything to use the [s6 service handler](https://github.com/just-containers/s6-overlay). 
+* log dir is now part of config dir.

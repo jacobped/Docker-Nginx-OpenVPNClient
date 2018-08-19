@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv bash
+exec /usr/sbin/openvpn --config /config/openvpn/openvpn.ovpn

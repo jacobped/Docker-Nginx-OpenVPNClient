@@ -1,0 +1,49 @@
+#!/usr/bin/with-contenv bash
+configPoweroff=false
+
+# make our folders
+mkdir -p \
+	/config/{nginx/site-confs,log/nginx,openvpn} 
+#	/run \
+#	/var/lib/nginx/tmp/client_body \
+#	/var/tmp/nginx
+
+# Legacy support - Move configs into new location.
+if [[ -f /config/nginx.conf ]]; then
+	mv /config/nginx.conf /config/nginx/nginx.conf
+fi
+if [[ -f /config/openvpn.ovpn ]]; then
+	mv /config/openvpn.ovpn /config/openvpn/openvpn.ovpn
+fi
+
+#if configs don't exists. Copy from samples and stop container.
+if [ ! -f /config/nginx/nginx.conf ] || [ ! -f /config/openvpn/openvpn.ovpn ]; then
+	cp -n sample-configs/nginx.conf.sample /config/nginx/nginx.conf
+	cp -n sample-configs/openvpn.ovpn.sample /config/openvpn/openvpn.ovpn
+    echo '*******************************************'
+	echo '** Copied sample files to directory.     **'
+	echo '** Please update them to fit your needs. **'
+    echo '*******************************************'
+
+    # Poweroff
+    configPoweroff=true
+fi
+
+# copy config files
+#[[ ! -f /config/nginx/nginx.conf ]] && \
+#	cp /defaults/nginx.conf /config/nginx/nginx.conf
+#[[ ! -f /config/nginx/site-confs/default ]] && \
+#	cp /defaults/default /config/nginx/site-confs/default
+
+# permissions
+chown -R abc:abc \
+	/config \
+#	/var/lib/nginx \
+#	/var/tmp/nginx
+chmod -R g+w \
+	/config/{nginx,openvpn}
+#chmod -R 644 /etc/logrotate.d
+
+if [ "$configPoweroff" = "true" ]; then
+    exit 1
+fi
