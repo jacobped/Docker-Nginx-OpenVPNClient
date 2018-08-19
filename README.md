@@ -78,3 +78,4 @@ Major changes to image. Made it far more robust and smaller in size.
 * Changes image base to the alpine image with s6 support from [linuxserver.io](https://github.com/linuxserver/docker-baseimage-alpine/)
 * Changed everything to use the [s6 service handler](https://github.com/just-containers/s6-overlay). 
 * log dir is now part of config dir.
+* Total image size decreased from 70MB to 9MB.
