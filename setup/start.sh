@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Fixes file formatting to work properly in container. It's like magic!
-dos2unix /config/*
-
 #if configs don't exists. Copy from samples and stop container.
 if [ ! -f /config/nginx.conf ] || [ ! -f /config/openvpn.ovpn ]; then
 	cp /setup/config/nginx.conf.sample /config/nginx.conf

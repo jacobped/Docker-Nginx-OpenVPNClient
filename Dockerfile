@@ -23,10 +23,7 @@ COPY setup /setup/
 # Get packagelist and install base packages
 RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d && \
 	apt-get update -y && \
-	apt-get install apt-utils dos2unix -y
-
-# Fixes file formatting for all files to work properly in container. It's like magic!
-RUN find . -type f -print0 | xargs -0 dos2unix
+	apt-get install apt-utils -y
 
 # Setup services
 RUN chown -R root:root /setup && chmod -Rf 555 /setup
